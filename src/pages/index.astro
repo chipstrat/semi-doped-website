@@ -37,17 +37,17 @@ const recent = rest.slice(0, 5);
       <p class="tagline">The business and technology of semiconductors. Alpha for engineers and investors alike.</p>
       <div class="hostgrid">
         <div class="host">
-          <img class="avatar" src="/hosts/austin.jpg" alt="Austin Lyons" width="64" height="64" loading="lazy" />
-          <div>
-            <div class="name">Austin Lyons</div>
-            <div class="role">Analyst &amp; founder, <a href="https://www.chipstrat.com/" rel="noopener">Chipstrat</a></div>
+          <img class="setphoto" src="/hosts/austin-set.jpg" alt="Austin Lyons on the Semi Doped set" width="1200" height="656" loading="lazy" />
+          <div class="hostmeta">
+            <span class="creds">MSEE + MBA</span>
+            <a class="affil" href="https://www.chipstrat.com/" rel="noopener">Chipstrat →</a>
           </div>
         </div>
         <div class="host">
-          <img class="avatar" src="/hosts/vik.jpg" alt="Vik Sekar" width="64" height="64" loading="lazy" />
-          <div>
-            <div class="name">Vik Sekar</div>
-            <div class="role">RF engineer &amp; author, <a href="https://www.viksnewsletter.com/" rel="noopener">Vik&rsquo;s Newsletter</a></div>
+          <img class="setphoto" src="/hosts/vik-set.jpg" alt="Vikram Sekar on the Semi Doped set" width="1200" height="650" loading="lazy" />
+          <div class="hostmeta">
+            <span class="creds">PhD EE</span>
+            <a class="affil" href="https://www.viksnewsletter.com/" rel="noopener">Vik&rsquo;s Newsletter →</a>
           </div>
         </div>
       </div>
@@ -104,28 +104,33 @@ const recent = rest.slice(0, 5);
     .hostgrid { grid-template-columns: 1fr; }
   }
   .host {
-    display: flex;
-    gap: 18px;
-    align-items: center;
     background: var(--surface);
     border: 1px solid var(--hairline);
     border-radius: var(--radius-md);
-    padding: 22px;
+    overflow: hidden;
   }
-  .avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    flex: none;
-    object-fit: cover;
+  .setphoto { display: block; width: 100%; height: auto; }
+  .hostmeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--sp-md);
+    padding: var(--sp-md) var(--sp-lg);
   }
-  .name {
+  .creds {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .affil {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: 0.02em;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    text-decoration: none;
   }
-  .role { font-size: 14.5px; color: var(--muted); }
-  .role a { color: var(--muted); }
-  .role a:hover { color: var(--accent); }
+  .affil:hover { color: var(--brick); }
 </style>
