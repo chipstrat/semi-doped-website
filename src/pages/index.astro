@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+import Player from '../components/Player.astro';
+import Platforms from '../components/Platforms.astro';
+import EpisodeRow from '../components/EpisodeRow.astro';
+import DailySignup from '../components/DailySignup.astro';
+import { getEpisodes, formatDateLong, formatDuration, epNum } from '../lib/feed';
+
+const episodes = await getEpisodes();
+const [latest, ...rest] = episodes;
+const recent = rest.slice(0, 5);
+---
+<Base title="Semi Doped — The Semiconductor Podcast">
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">
+        <b>{epNum(latest.num)}</b>&ensp;·&ensp;{formatDateLong(latest.date)}&ensp;·&ensp;{formatDuration(latest.duration)}
+      </div>
+      <h1><a href={`/episodes/${latest.slug}/`}>{latest.title}</a></h1>
+      <p class="dek">{latest.summary.length > 260 ? latest.summary.slice(0, 260).trimEnd() + '…' : latest.summary}</p>
+      <Player src={latest.mp3} duration={latest.duration} />
+      <Platforms />
+    </div>
+  </section>
+
+  <section class="eplist">
+    <div class="wrap">
+      <h2>Recent Episodes</h2>
+      {recent.map((ep) => <EpisodeRow episode={ep} />)}
+      <a class="all-link" href="/episodes/">ALL {episodes.length} EPISODES →</a>
+    </div>
+  </section>
+
+  <section class="hosts" id="hosts">
+    <div class="wrap">
+      <h2>Your Hosts</h2>
+      <p class="tagline">The business and technology of semiconductors. Alpha for engineers and investors alike.</p>
+      <div class="hostgrid">
+        <div class="host">
+          <div class="avatar">AL</div>
+          <div>
+            <div class="name">Austin Lyons</div>
+            <div class="role">Analyst &amp; founder, <a href="https://www.chipstrat.com/" rel="noopener">Chipstrat</a></div>
+          </div>
+        </div>
+        <div class="host">
+          <div class="avatar">VS</div>
+          <div>
+            <div class="name">Vik Sekar</div>
+            <div class="role">RF engineer &amp; author, <a href="https://www.viksnewsletter.com/" rel="noopener">Vik&rsquo;s Newsletter</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <DailySignup />
+</Base>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--hairline);
+    padding: 68px 0 56px;
+  }
+  .hero .kicker { margin-bottom: 20px; }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: 0.005em;
+    max-width: 19ch;
+    margin-bottom: 22px;
+  }
+  .hero h1 a { color: var(--ink); text-decoration: none; transition: color 0.2s ease; }
+  .hero h1 a:hover { color: var(--accent); }
+  .hero .dek {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 56ch;
+    margin-bottom: 34px;
+  }
+  .eplist { padding: 20px 0 8px; }
+  .eplist h2 { font-size: 28px; padding: 26px 0 18px; }
+  .all-link {
+    display: inline-block;
+    margin: 26px 0 34px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .hosts {
+    border-top: 1px solid var(--hairline);
+    padding: 8px 0 48px;
+  }
+  .hosts h2 { font-size: 28px; padding: 26px 0 10px; }
+  .tagline { color: var(--muted); margin-bottom: var(--sp-lg); max-width: 60ch; }
+  .hostgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 700px) {
+    .hostgrid { grid-template-columns: 1fr; }
+  }
+  .host {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 22px;
+  }
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    flex: none;
+    background: radial-gradient(circle at 50% 38%, #E96822, #7d2910);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+  }
+  .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+  }
+  .role { font-size: 14.5px; color: var(--muted); }
+  .role a { color: var(--muted); }
+  .role a:hover { color: var(--accent); }
+</style>

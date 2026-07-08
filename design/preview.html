@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semi Doped — Design System Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300..800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #F2C300;
+    --accent: #E96822;   /* brand orange */
+    --brick: #D94A1E;
+    --font-display: "Oxanium", sans-serif;
+    --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  /* ---------- Variant palettes ---------- */
+  .v-cream {
+    --bg: #F5F1E8; --surface: #FDFBF5; --ink: #17130D; --muted: #6E6557;
+    --hairline: #D8CFBD; --block: #070707; --block-ink: #F5F1E8; --block-muted: #8a8a90;
+  }
+  .v-white {
+    --bg: #FFFFFF; --surface: #F6F6F3; --ink: #121210; --muted: #6C6C66;
+    --hairline: #E4E4DD; --block: #070707; --block-ink: #F5F5F0; --block-muted: #8a8a90;
+  }
+  .v-dark {
+    --bg: #070707; --surface: #141416; --ink: #F2EDE2; --muted: #8a8a90;
+    --hairline: #2a2a2e; --block: #0D0D0F; --block-ink: #F2EDE2; --block-muted: #8a8a90;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg); color: var(--ink);
+    transition: background .35s ease, color .35s ease;
+    font-size: 17px; line-height: 1.6;
+  }
+  /* ---------- Preview chrome (the switcher bar) ---------- */
+  .chrome {
+    position: sticky; top: 0; z-index: 50;
+    background: #070707; color: #F5F1E8; border-bottom: 1px solid #2a2a2e;
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 28px; font-family: var(--font-mono); font-size: 12px;
+  }
+  .chrome .label { color: #8a8a90; letter-spacing: .08em; }
+  .chrome button {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em;
+    background: transparent; color: #8a8a90;
+    border: 1px solid #8a8a90; border-radius: 999px;
+    padding: 5px 16px; cursor: pointer; transition: all .2s ease;
+  }
+  .chrome button:hover { color: #fff; border-color: #fff; }
+  .chrome button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .section-tag {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+    color: var(--accent); text-transform: uppercase;
+    padding: 64px 0 12px; border-bottom: 1px solid var(--hairline); margin-bottom: 0;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- Brand pieces ---------- */
+  .wordmark { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .wordmark .wm {
+    font-family: var(--font-display); font-weight: 700; font-size: 19px;
+    letter-spacing: .12em; white-space: nowrap;
+  }
+  .wordmark .wm .s { color: var(--ink); }
+  .wordmark .wm .d { color: var(--accent); }
+
+  /* ============================================================
+     THE MOCKUP — Semi Doped homepage
+     ============================================================ */
+  .mock { border: 1px solid var(--hairline); margin-top: 28px; background: var(--bg); }
+
+  /* Masthead */
+  .mast {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px; border-bottom: 1px solid var(--hairline);
+  }
+  .mast nav { display: flex; gap: 28px; font-size: 15px; }
+  .mast nav a { color: var(--ink); text-decoration: none; }
+  .mast nav a:hover { color: var(--accent); }
+  .mast .cta {
+    font-size: 14px; font-weight: 600; color: #fff; background: var(--accent);
+    padding: 8px 20px; border-radius: 999px; text-decoration: none;
+    font-family: var(--font-display); letter-spacing: .04em;
+  }
+
+  /* Hero */
+  .hero { padding: 68px 40px 56px; border-bottom: 1px solid var(--hairline); }
+  .kicker {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+  }
+  .kicker b { color: var(--accent); font-weight: 500; }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 700; font-size: 52px;
+    line-height: 1.08; letter-spacing: .005em; max-width: 19ch; margin-bottom: 22px;
+  }
+  .hero p.dek { font-size: 18px; color: var(--muted); max-width: 56ch; margin-bottom: 34px; }
+  .player {
+    display: flex; align-items: center; gap: 18px; max-width: 640px;
+    background: var(--surface); border: 1px solid var(--hairline);
+    padding: 14px 20px; border-radius: 12px;
+  }
+  .play {
+    width: 52px; height: 52px; border-radius: 50%; flex: none;
+    background: var(--accent); border: none; cursor: pointer; position: relative;
+  }
+  .play::after {
+    content: ""; position: absolute; left: 55%; top: 50%; transform: translate(-50%,-50%);
+    border-left: 16px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+  }
+  .track { flex: 1; }
+  .track .bar { height: 4px; background: var(--hairline); border-radius: 2px; position: relative; }
+  .track .bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 34%; background: var(--accent); border-radius: 2px; }
+  .track .meta {
+    display: flex; justify-content: space-between; margin-top: 8px;
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--muted);
+  }
+
+  /* Platform strip (under player) */
+  .platforms {
+    display: flex; align-items: center; gap: 22px; margin-top: 22px; flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--muted);
+  }
+  .platforms a { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 7px; }
+  .platforms a:hover { color: var(--accent); }
+  .platforms .yt {
+    font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .04em;
+    color: var(--ink); border: 1.5px solid var(--ink); border-radius: 999px; padding: 8px 18px;
+  }
+  .platforms .yt:hover { border-color: var(--accent); color: var(--accent); }
+  .platforms .yt .tri { width: 0; height: 0; border-left: 9px solid var(--accent); border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; }
+
+  /* Episode list */
+  .eplist { padding: 20px 40px 8px; }
+  .eplist h2, .hosts h2, .newsletter h2 {
+    font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: .015em;
+    padding: 26px 0 18px;
+  }
+  .ep {
+    display: grid; grid-template-columns: 88px 1fr auto; gap: 24px; align-items: center;
+    padding: 18px 0; border-top: 1px solid var(--hairline);
+  }
+  .ep .num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
+  /* Custom episode art tile — generated per episode at build time */
+  .epart {
+    width: 88px; height: 88px; border-radius: 12px; background: #070707;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    position: relative; overflow: hidden;
+  }
+  .epart::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 70% at 50% 30%, rgba(233,104,34,.28), transparent 65%); }
+  .epart .n { position: relative; font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: .08em; color: #fff; }
+  .epart .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; }
+  .ep .title { font-family: var(--font-display); font-size: 21px; font-weight: 600; letter-spacing: .01em; }
+  .ep .title a { color: var(--ink); text-decoration: none; }
+  .ep .title a:hover { color: var(--accent); }
+  .ep .sub { font-size: 15px; color: var(--muted); margin-top: 6px; max-width: 62ch; font-family: var(--font-body); }
+  .ep .when { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .all-link { display: inline-block; margin: 26px 0 34px; font-weight: 600; color: var(--accent); text-decoration: none; font-size: 15px; font-family: var(--font-display); letter-spacing: .03em; }
+
+  /* Hosts */
+  .hosts { padding: 8px 40px 40px; border-top: 1px solid var(--hairline); }
+  .hostgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .host {
+    display: flex; gap: 18px; align-items: center;
+    background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px; padding: 22px;
+  }
+  .avatar {
+    width: 64px; height: 64px; border-radius: 50%; flex: none;
+    background: radial-gradient(circle at 50% 38%, #E96822, #7d2910); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 20px;
+  }
+  .host .name { font-weight: 700; font-size: 17px; font-family: var(--font-display); letter-spacing: .02em; }
+  .host .role { font-size: 14.5px; color: var(--muted); }
+
+  /* Newsletter block — brand black in every variant, warm glow, wafer mark */
+  .newsletter {
+    margin: 0; padding: 56px 40px; background: var(--block); color: var(--block-ink);
+    position: relative; overflow: hidden;
+  }
+  .newsletter::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(55% 130% at 78% 50%, rgba(233,104,34,.22), transparent 62%);
+    pointer-events: none;
+  }
+  .newsletter h2 { color: #fff; padding-top: 0; position: relative; }
+  .newsletter p { color: var(--block-muted); max-width: 52ch; margin-bottom: 26px; position: relative; }
+  .newsletter .row { display: flex; gap: 12px; max-width: 480px; position: relative; }
+  .newsletter input {
+    flex: 1; font-family: var(--font-body); font-size: 15px;
+    background: transparent; border: 1px solid #55555c; border-radius: 999px;
+    color: #fff; padding: 11px 20px; outline: none;
+  }
+  .newsletter button {
+    font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: .03em;
+    background: var(--accent); color: #fff; border: none; border-radius: 999px;
+    padding: 11px 26px; cursor: pointer;
+  }
+  .newsletter .wafer-bg { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); pointer-events: none; }
+
+  /* Footer */
+  .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px; border-top: 1px solid var(--hairline);
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em;
+  }
+  .foot a { color: var(--ink); text-decoration: none; }
+  .foot a:hover { color: var(--accent); }
+
+  /* ============================================================
+     SPECIMEN SECTIONS
+     ============================================================ */
+  .spec { padding: 34px 0 8px; display: grid; grid-template-columns: 200px 1fr; gap: 28px; border-bottom: 1px solid var(--hairline); }
+  .spec .role { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; line-height: 1.9; }
+  .spec .demo-display { font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1.1; letter-spacing: .005em; padding-bottom: 30px;}
+  .spec .demo-body { font-size: 17px; max-width: 62ch; padding-bottom: 30px; }
+  .spec .demo-mono { font-family: var(--font-mono); font-size: 13.5px; color: var(--muted); padding-bottom: 30px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; padding: 30px 0 40px; }
+  .sw { border: 1px solid var(--hairline); border-radius: 10px; overflow: hidden; }
+  .sw .chip { height: 74px; }
+  .sw .info { padding: 10px 12px; font-family: var(--font-mono); font-size: 11px; line-height: 1.7; color: var(--muted); background: var(--surface); }
+  .sw .info b { display: block; color: var(--ink); font-weight: 500; }
+  .logos { display: flex; gap: 20px; flex-wrap: wrap; padding: 30px 0 10px; }
+  .logocard {
+    flex: 1; min-width: 260px; min-height: 190px; border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    border: 1px solid var(--hairline);
+  }
+  .logocard.on-black { background: #070707; }
+  .logocard.on-canvas { background: var(--bg); }
+  .logocard .cap { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .logocard .wm { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: .12em; }
+  .logocard.on-black .wm .s { color: #fff; }
+  .logocard.on-canvas .wm .s { color: var(--ink); }
+  .logocard .wm .d { color: var(--accent); }
+  .note { padding: 26px 0 80px; color: var(--muted); font-size: 15px; max-width: 70ch; }
+</style>
+</head>
+<body class="v-cream">
+
+<!-- Wafer mark: 4x4 lattice, corners removed, doped atom at (60,60) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="wafer-color">
+      <circle cx="40" cy="20" r="7.5" fill="#F0951C"/><circle cx="60" cy="20" r="7.5" fill="#E96822"/>
+      <circle cx="20" cy="40" r="7.5" fill="#F2C300"/><circle cx="40" cy="40" r="7.5" fill="#F0951C"/><circle cx="60" cy="40" r="7.5" fill="#E96822"/><circle cx="80" cy="40" r="7.5" fill="#D94A1E"/>
+      <circle cx="20" cy="60" r="7.5" fill="#F2C300"/><circle cx="40" cy="60" r="7.5" fill="#F0951C"/><circle cx="60" cy="60" r="6.5" fill="none" stroke="#E96822" stroke-width="3"/><circle cx="80" cy="60" r="7.5" fill="#D94A1E"/>
+      <circle cx="40" cy="80" r="7.5" fill="#F0951C"/><circle cx="60" cy="80" r="7.5" fill="#E96822"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="chrome">
+  <span class="label">SEMI DOPED — DESIGN PREVIEW · PICK A CANVAS →</span>
+  <button data-v="v-cream" class="active">A · CREAM</button>
+  <button data-v="v-white">B · WHITE</button>
+  <button data-v="v-dark">C · DARK</button>
+</div>
+
+<div class="wrap">
+  <div class="section-tag">01 · Homepage mockup</div>
+
+  <div class="mock">
+    <div class="mast">
+      <a class="wordmark" href="#">
+        <svg width="34" height="34" viewBox="0 0 100 100"><use href="#wafer-color"/></svg>
+        <span class="wm"><span class="s">SEMI </span><span class="d">DOPED</span></span>
+      </a>
+      <nav>
+        <a href="#">Episodes</a><a href="#">Hosts</a><a href="#">Daily</a>
+      </nav>
+      <a class="cta" href="#">Subscribe</a>
+    </div>
+
+    <div class="hero">
+      <div class="kicker"><b>EP 035</b> &nbsp;·&nbsp; JULY 3, 2026 &nbsp;·&nbsp; 50 MIN</div>
+      <h1>Micron&rsquo;s Record Profits: AI Is Eating All the Memory</h1>
+      <p class="dek">Austin and Vik break down the memory crisis — AI demand driving unprecedented profits for memory makers while pushing price hikes onto consumer electronics.</p>
+      <div class="player">
+        <button class="play" aria-label="Play"></button>
+        <div class="track">
+          <div class="bar"><i></i></div>
+          <div class="meta"><span>17:32</span><span>50:55</span></div>
+        </div>
+      </div>
+      <div class="platforms">
+        <a class="yt" href="#"><span class="tri"></span> WATCH ON YOUTUBE</a>
+        <a href="#">APPLE PODCASTS</a>
+        <a href="#">SPOTIFY</a>
+        <a href="#">RSS</a>
+      </div>
+    </div>
+
+    <div class="eplist">
+      <h2>Recent Episodes</h2>
+      <div class="ep">
+        <div class="epart">
+          <svg width="34" height="34" viewBox="0 0 100 100" style="position:relative"><use href="#wafer-color"/></svg>
+          <span class="n">EP 034</span>
+          <span class="bar" style="background:linear-gradient(90deg,#F2C300,#E96822)"></span>
+        </div>
+        <div><div class="title"><a href="#">Qualcomm&rsquo;s HBC Memory, Alphawave, Modular, and More</a></div>
+        <div class="sub">Qualcomm flew Austin to New York for its investor day, where the company laid out a plan to make data center, automotive, and IoT two-thirds of its business by FY29.</div></div>
+        <span class="when">JUN 29 · 59 MIN</span>
+      </div>
+      <div class="ep">
+        <div class="epart">
+          <svg width="34" height="34" viewBox="0 0 100 100" style="position:relative"><use href="#wafer-color"/></svg>
+          <span class="n">EP 033</span>
+          <span class="bar" style="background:linear-gradient(90deg,#E96822,#D94A1E)"></span>
+        </div>
+        <div><div class="title"><a href="#">Advanced Packaging: TSMC CoWoS, Intel EMIB</a></div>
+        <div class="sub">Packaging is no longer an afterthought. It is the chip — and Intel&rsquo;s EMIB challenges TSMC&rsquo;s CoWoS.</div></div>
+        <span class="when">JUN 19 · 69 MIN</span>
+      </div>
+      <div class="ep">
+        <div class="epart">
+          <svg width="34" height="34" viewBox="0 0 100 100" style="position:relative"><use href="#wafer-color"/></svg>
+          <span class="n">EP 032</span>
+          <span class="bar" style="background:linear-gradient(90deg,#D94A1E,#F2C300)"></span>
+        </div>
+        <div><div class="title"><a href="#">Computex Mania 2026: Optics and Power</a></div>
+        <div class="sub">Austin and Vik meet in person for the first time after six months of podcasting together — and report from the show floor.</div></div>
+        <span class="when">JUN 12 · 48 MIN</span>
+      </div>
+      <a class="all-link" href="#">ALL 35 EPISODES →</a>
+    </div>
+
+    <div class="hosts">
+      <h2>Your Hosts</h2>
+      <div class="hostgrid">
+        <div class="host">
+          <div class="avatar">AL</div>
+          <div><div class="name">Austin Lyons</div><div class="role">Analyst &amp; founder, Chipstrat</div></div>
+        </div>
+        <div class="host">
+          <div class="avatar">VS</div>
+          <div><div class="name">Vik Sekar</div><div class="role">RF engineer &amp; author, Vik&rsquo;s Newsletter</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="newsletter">
+      <svg class="wafer-bg" width="180" height="180" viewBox="0 0 100 100" opacity="0.9"><use href="#wafer-color"/></svg>
+      <h2>Semi Doped Daily</h2>
+      <p>The daily brew of semiconductors. News and analysis in your inbox every market morning.</p>
+      <div class="row">
+        <input type="email" placeholder="you@company.com">
+        <button>Sign up</button>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>LISTEN: <a href="#">APPLE</a> / <a href="#">SPOTIFY</a> / <a href="#">YOUTUBE</a> / <a href="#">RSS</a></span>
+      <span>© 2026 SEMI DOPED LLC</span>
+    </div>
+  </div>
+
+  <div class="section-tag">02 · Logo lockups (Oxanium + wafer mark)</div>
+  <div class="logos">
+    <div class="logocard on-black">
+      <div style="display:flex;align-items:center;gap:16px">
+        <svg width="56" height="56" viewBox="0 0 100 100"><use href="#wafer-color"/></svg>
+        <span class="wm"><span class="s">SEMI </span><span class="d">DOPED</span></span>
+      </div>
+      <div class="cap">Horizontal · on brand black</div>
+    </div>
+    <div class="logocard on-black" style="gap:18px">
+      <svg width="64" height="64" viewBox="0 0 100 100"><use href="#wafer-color"/></svg>
+      <span class="wm"><span class="s">SEMI </span><span class="d">DOPED</span></span>
+      <div class="cap">Vertical · centered</div>
+    </div>
+    <div class="logocard on-canvas">
+      <div style="display:flex;align-items:center;gap:16px">
+        <svg width="56" height="56" viewBox="0 0 100 100"><use href="#wafer-color"/></svg>
+        <span class="wm"><span class="s">SEMI </span><span class="d">DOPED</span></span>
+      </div>
+      <div class="cap">On the site canvas</div>
+    </div>
+  </div>
+
+  <div class="section-tag">03 · Typography</div>
+  <div class="spec">
+    <div class="role">DISPLAY<br>Oxanium 600–700<br>wordmark, headlines, episode titles, buttons</div>
+    <div class="demo-display">The business and technology of semiconductors.</div>
+  </div>
+  <div class="spec">
+    <div class="role">BODY<br>IBM Plex Sans 400<br>paragraphs, navigation, UI</div>
+    <div class="demo-body">Alpha for engineers and investors alike. Two hosts who work in the industry break down what actually matters each week — foundry economics, AI infrastructure, memory cycles, and the companies behind them.</div>
+  </div>
+  <div class="spec">
+    <div class="role">MONO<br>IBM Plex Mono 400<br>dates, durations, episode numbers</div>
+    <div class="demo-mono">EP 035 · JUL 3 2026 · 50:55 · TRANSCRIPT AVAILABLE</div>
+  </div>
+
+  <div class="section-tag">04 · Palette (brand colors constant · canvas switches)</div>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#F2C300"></div><div class="info"><b>Yellow</b>#F2C300 · lattice</div></div>
+    <div class="sw"><div class="chip" style="background:#E96822"></div><div class="info"><b>Orange</b>#E96822 · accent, DOPED</div></div>
+    <div class="sw"><div class="chip" style="background:#D94A1E"></div><div class="info"><b>Brick</b>#D94A1E · lattice</div></div>
+    <div class="sw"><div class="chip" style="background:#070707"></div><div class="info"><b>Black</b>#070707 · brand block</div></div>
+    <div class="sw"><div class="chip" style="background:var(--bg)"></div><div class="info"><b>Canvas</b>background</div></div>
+    <div class="sw"><div class="chip" style="background:var(--surface)"></div><div class="info"><b>Surface</b>cards, player</div></div>
+    <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="info"><b>Ink</b>primary text</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hairline)"></div><div class="info"><b>Hairline</b>rules, borders</div></div>
+  </div>
+
+  <p class="note">Brand pieces are constant across all three canvases: Oxanium wordmark (SEMI in ink, DOPED in orange), the wafer mark, the #E96822 accent, and a #070707 Daily block with the warm glow from your video templates. Only the canvas changes — A warm paper, B print white, C the brand black itself.</p>
+</div>
+
+<script>
+  document.querySelectorAll(".chrome button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.body.className = btn.dataset.v;
+      document.querySelectorAll(".chrome button").forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+    });
+  });
+</script>
+</body>
+</html>

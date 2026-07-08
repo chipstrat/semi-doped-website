@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semi Doped — Logo / Video Overlay Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Saira:wght@300..900&family=Oxanium:wght@300..800&family=Sora:wght@300..800&family=Syne:wght@400..800&family=Playfair+Display:wght@400..900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#F2C300;--orange:#E96822;--brick:#D94A1E;--amber:#F59E0B;
+    --black:#070707;--white:#FFFFFF;--panel:#141416;--line:#2a2a2e;--muted:#8a8a90;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:"IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  header.hero{padding:60px 0 38px;border-bottom:1px solid var(--line);background:radial-gradient(120% 80% at 50% -10%, rgba(233,104,34,.14), transparent 60%);}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);}
+  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:40px;letter-spacing:.01em;margin:14px 0 8px;}
+  .sub{color:var(--muted);max-width:720px;font-size:15px;}
+  .palette{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;}
+  .chip{display:flex;flex-direction:column;justify-content:flex-end;width:118px;height:64px;border-radius:10px;padding:8px 10px;font-family:"IBM Plex Mono",monospace;font-size:11px;border:1px solid rgba(255,255,255,.14);}
+  .chip.light{color:#111;}.chip.dark{color:#fff;}
+
+  section{padding:50px 0;border-bottom:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .sec-num{font-family:"IBM Plex Mono",monospace;color:var(--orange);font-size:13px;letter-spacing:.15em;}
+  h2{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:26px;letter-spacing:.01em;margin:0;}
+  .sec-note{color:var(--muted);font-size:14px;max-width:780px;margin:8px 0 28px;}
+  .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);border:1px solid rgba(242,195,0,.35);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:middle;}
+
+  .row{display:flex;align-items:center;gap:24px;padding:22px 26px;border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:14px;flex-wrap:wrap;}
+  .row .meta{min-width:210px;}
+  .row .fname{font-family:"IBM Plex Mono",monospace;font-size:13px;color:#fff;}
+  .row .fnote{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  .row.pick{border-color:rgba(233,104,34,.55);box-shadow:0 0 0 1px rgba(233,104,34,.25) inset;background:linear-gradient(180deg,rgba(233,104,34,.06),transparent);}
+
+  .wm{display:flex;align-items:baseline;gap:.34em;line-height:1;white-space:nowrap;}
+  .wm .s{color:#fff;} .wm .d{color:var(--orange);}
+  .wm.big{font-size:52px;} .wm.med{font-size:34px;}
+  .lug{letter-spacing:.14em;} .lug2{letter-spacing:.05em;}
+  .heavier{-webkit-text-stroke-width:.8px;-webkit-text-stroke-color:currentColor;}
+  .heavier2{-webkit-text-stroke-width:1.4px;-webkit-text-stroke-color:currentColor;}
+
+  .f-space{font-family:"Space Grotesk",sans-serif;}
+  .f-saira{font-family:"Saira",sans-serif;}
+  .f-oxanium{font-family:"Oxanium",sans-serif;}
+  .f-baijam{font-family:"Bai Jamjuree",sans-serif;}
+  .f-sora{font-family:"Sora",sans-serif;}
+  .f-syne{font-family:"Syne",sans-serif;}
+  .f-playfair{font-family:"Playfair Display",serif;}
+  .wlabel{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);width:78px;flex:0 0 auto;}
+  .f-doto{font-family:"Doto",sans-serif;font-variation-settings:"ROND" 100;}
+  .f-pixelify{font-family:"Pixelify Sans",sans-serif;}
+  .f-micro5{font-family:"Micro 5",sans-serif;}
+  .f-plexmono{font-family:"IBM Plex Mono",monospace;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:170px;text-align:center;}
+  .card .label{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;}
+
+  .mono{display:flex;align-items:center;line-height:1;}
+  .mono .s{color:#fff;} .mono .d{color:var(--orange);}
+  .sd-xl{font-size:96px;} .sd-l{font-size:72px;}
+  .ring{display:inline-block;width:.34em;height:.34em;border:.09em solid var(--orange);border-radius:50%;vertical-align:.05em;margin:0 .04em;}
+
+  .lockup{display:flex;align-items:center;gap:18px;}
+
+  /* ---------- REAL VIDEO FRAME ---------- */
+  .realframe{position:relative;aspect-ratio:3024/1704;border-radius:10px;overflow:hidden;background-image:url('sd_frame.jpg');background-size:cover;background-position:center;}
+  .realframe.austin{aspect-ratio:2000/1124;background-image:url('sd_frame_austin.jpg');}
+  .bgframe{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-image:url('sd_bg_template.jpg');background-size:cover;background-position:center;}
+  .bgframe.v2{background-image:url('sd_bg_template2.jpg');}
+  .bgframe.v3{background-image:url('sd_bg_template3.jpg');}
+  .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,7,.15),rgba(7,7,7,.72));}
+  .scrim.soft{background:radial-gradient(70% 90% at 50% 55%,rgba(7,7,7,.72),rgba(7,7,7,.25));}
+  .bug{position:absolute;display:flex;align-items:center;gap:.45em;line-height:1;}
+  .bug.tr{top:6%;right:4.5%;}
+  .bug.tl{top:6%;left:4.5%;}
+  .bug.br{bottom:7%;right:4.5%;}
+  .bug.bl{bottom:7%;left:4.5%;}
+  .bug .wm .s{color:#fff;}
+  .whitebug .wm .s,.whitebug .wm .d{color:#fff;}
+  .op{opacity:.72;}
+
+  .l3{position:absolute;left:5%;bottom:9%;background:rgba(7,7,7,.62);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);border-left:3px solid var(--orange);border-radius:10px;padding:11px 20px 12px;}
+  .l3 .name{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:22px;letter-spacing:.01em;color:#fff;line-height:1.1;}
+  .l3 .role{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#d9b48a;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;}
+  .l3.bar{border-left:none;padding-left:20px;}
+  .l3.bar .accent{position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--yellow),var(--brick));border-radius:10px 0 0 10px;}
+
+  .center-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
+  .mockcap{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;margin-top:9px;}
+
+  /* ---------- SOCIALS ---------- */
+  .platform{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0d0d0f;margin-bottom:22px;}
+  .phead{display:flex;align-items:center;gap:10px;padding:12px 16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:#cfcfd4;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--line);}
+  .phead .dotmk{width:16px;height:16px;}
+  .banner{position:relative;overflow:hidden;background:#070707;display:flex;align-items:center;}
+  .banner .glow{position:absolute;inset:0;background:radial-gradient(55% 130% at 28% 50%, rgba(233,104,34,.30), transparent 62%);}
+  .banner .content{position:relative;display:flex;align-items:center;gap:18px;padding:0 6%;}
+  .banner.x3{aspect-ratio:3/1;}
+  .banner.li{aspect-ratio:1128/191;}
+  .banner.yt{aspect-ratio:2560/1440;justify-content:center;}
+  .banner.yt .content{padding:0;flex-direction:column;gap:12px;text-align:center;}
+  .safe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60.4%;height:29.4%;border:1px dashed rgba(255,255,255,.28);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+  .safe .content{padding:0;flex-direction:column;gap:10px;}
+  .safelbl{position:absolute;top:6px;left:8px;font-family:"IBM Plex Mono",monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.1em;}
+  .btagline{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#d9b48a;letter-spacing:.14em;text-transform:uppercase;}
+
+  .avatar{border-radius:50%;overflow:hidden;background:#070707;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .avatar.sq{border-radius:24%;}
+  .avatar.warm{background:radial-gradient(circle at 50% 38%,#E96822,#7d2910);}
+  .avatar.white{background:#fff;}
+  .avrow{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;padding:20px;}
+  .avwrap{display:flex;flex-direction:column;align-items:center;gap:7px;}
+  .avcap{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);text-align:center;}
+
+  /* profile row (avatar overlapping banner) */
+  .profile{padding:0 20px 18px;}
+  .profile .prow{display:flex;align-items:flex-end;gap:16px;margin-top:-42px;}
+  .profile .pa{border:4px solid #0d0d0f;border-radius:50%;}
+  .profile .pa.sq{border-radius:24%;}
+  .profile .pinfo{padding-bottom:4px;}
+  .profile .pname{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;gap:7px;}
+  .profile .pverify{color:var(--orange);font-size:15px;}
+  .profile .phandle{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);margin-top:1px;}
+  .profile .pbio{font-size:13px;color:#c7c7cc;margin-top:9px;max-width:560px;line-height:1.5;}
+  .profile .pmeta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-top:8px;}
+
+  /* ---------- EXTRA VARIATIONS ---------- */
+  .cover{width:186px;height:186px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;}
+  .cover.warm{background:#070707;}
+  .cover.warm::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 38%,rgba(233,104,34,.26),transparent 66%);}
+  .cover.light{background:#fff;}
+  .cover .wm,.cover .mono{position:relative;}
+  .tile{border-radius:24%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  .tile.grad{background:linear-gradient(145deg,#F2C300,#E96822 55%,#D94A1E);}
+  .tile.dark{background:#070707;}
+  .hex{clip-path:polygon(50% 1%,93% 25%,93% 75%,50% 99%,7% 75%,7% 25%);}
+  .dgrad{background:linear-gradient(90deg,#F2C300,#E96822 52%,#D94A1E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+  .fullbar{position:absolute;left:0;right:0;bottom:0;padding:14px 6%;background:linear-gradient(0deg,rgba(7,7,7,.85),rgba(7,7,7,.22) 78%,transparent);display:flex;align-items:center;gap:14px;}
+  .fullbar .fbacc{width:4px;height:36px;background:linear-gradient(180deg,var(--yellow),var(--brick));border-radius:3px;flex:0 0 auto;}
+  .fullbar .fbname{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:21px;color:#fff;line-height:1.1;}
+  .fullbar .fbrole{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#d9b48a;letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
+  .fullbar .fbright{margin-left:auto;display:flex;align-items:center;gap:.5em;}
+  .ogcard{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0d0d0f;width:100%;max-width:540px;}
+  .ogimg{aspect-ratio:1200/630;position:relative;background:#070707;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;overflow:hidden;}
+  .ogimg .glow2{position:absolute;inset:0;background:radial-gradient(60% 80% at 40% 45%,rgba(233,104,34,.22),transparent 62%);}
+  .ogmeta{padding:12px 15px;}
+  .ogmeta .ogu{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+  .ogmeta .ogt{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:15px;color:#fff;margin-top:4px;}
+  .ogmeta .ogd{font-size:12px;color:var(--muted);margin-top:3px;}
+
+  /* ---------- SPONSORS ---------- */
+  .sponsor{display:inline-flex;align-items:center;gap:.42em;color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:600;letter-spacing:.08em;line-height:1;}
+  .slabel{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.62);}
+  .supportbar{position:absolute;left:0;right:0;bottom:0;padding:12px 5% 14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;background:linear-gradient(0deg,rgba(7,7,7,.74),transparent);}
+
+  .footer{padding:38px 0 80px;color:var(--muted);font-size:13px;}
+  .rec{background:linear-gradient(180deg,rgba(242,195,0,.06),transparent);border:1px solid rgba(242,195,0,.3);border-radius:14px;padding:22px 26px;}
+  .rec h3{font-family:"Space Grotesk";margin:0 0 10px;font-size:16px;letter-spacing:.01em;color:var(--yellow);}
+  .rec ul{margin:0;padding-left:18px;} .rec li{margin-bottom:6px;font-size:14px;}
+  /* ---------- PRINT / PDF ---------- */
+  @media print{
+    @page{ size:Letter landscape; margin:11mm; }
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    html,body{ background:#070707 !important; }
+    .wrap{ max-width:100%; padding:0 4mm; }
+    header.hero{ padding:14px 0 18px; }
+    h1{ font-size:30px; }
+    section{ padding:16px 0; }
+    .sec-head{ break-after:avoid; }
+    .sec-note{ margin-bottom:14px; }
+    .row,.card,.platform,.avwrap,.ogcard,.cover,.realframe{ break-inside:avoid; }
+    .grid2>div,.grid3>div,.avrow>div{ break-inside:avoid; }
+    .footer{ break-inside:avoid; padding:18px 0 0; }
+    .rec{ break-inside:avoid; }
+    /* tighten big type so rows fit the page */
+    .wm.big{ font-size:44px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Semi Doped · 4 candidate fonts · on real frames</div>
+    <h1>Logo &amp; Video-Overlay Options</h1>
+    <p class="sub"><b>Direction so far:</b> all-caps wordmark with solid colors (SEMI white, DOPED orange), the gradient reserved for the wafer mark, white logo overlays on video, and the wafer mark as the video bug. <b>Still open:</b> which font — four candidates (Space Grotesk, Saira, Oxanium, Bai Jamjuree) shown below as wordmarks and full logos, then on real frames.</p>
+    <div class="palette">
+      <div class="chip light" style="background:#F2C300">#F2C300<br>Yellow</div>
+      <div class="chip light" style="background:#E96822">#E96822<br>Orange</div>
+      <div class="chip dark" style="background:#D94A1E">#D94A1E<br>Brick</div>
+      <div class="chip dark" style="background:#070707">#070707<br>Black</div>
+      <div class="chip light" style="background:#FFFFFF">#FFFFFF<br>White</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 1. WORDMARKS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Font candidates — distinctive D <span class="tag">regal / expensive</span></h2></div>
+    <p class="sec-note">Slimmed to a few faces with a clean, characterful D — no Space-Grotesk spur, no O-like bowl — and a richer, more expensive feel. Each shown in a few weights, then in the horizontal and vertical (centered) lockups.</p>
+    <div id="fontCandidates"></div>
+  </div>
+</section>
+
+<!-- ============ 4. ON THE REAL FRAME ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>On real frames <span class="tag">the true test</span></h2></div>
+    <p class="sec-note">Both hosts' setups with the old logos removed. The persistent watermark is the <b>white wafer mark only</b> — no wordmark — shown in a few positions and opacities. Lower-thirds and the intro/outro card also included. Frame one below; the second host's frame in 04·b.</p>
+
+    <div class="grid2">
+
+      <!-- wafer mark white top-right (the pick) -->
+      <div>
+        <div class="realframe">
+          <div class="bug tr op"><svg width="46" height="46" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Wafer mark · white · top-right</div>
+      </div>
+
+      <!-- wafer mark white top-left -->
+      <div>
+        <div class="realframe">
+          <div class="bug tl op"><svg width="46" height="46" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Wafer mark · white · top-left</div>
+      </div>
+
+      <!-- wafer mark white bottom-right -->
+      <div>
+        <div class="realframe">
+          <div class="bug br op"><svg width="44" height="44" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Wafer mark · white · bottom-right</div>
+      </div>
+
+      <!-- wafer mark white, subtle -->
+      <div>
+        <div class="realframe">
+          <div class="bug tr" style="opacity:.48"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Wafer mark · white 48% · more subtle</div>
+      </div>
+
+      <!-- lower third + wafer watermark -->
+      <div>
+        <div class="realframe">
+          <div class="l3 bar"><span class="accent"></span><div class="name f-space">Vikram Sekar</div><div class="role">Semi Doped · Vik's Newsletter</div></div>
+          <div class="bug tr op"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Lower-third + wafer watermark</div>
+      </div>
+
+      <!-- intro/outro full logo card -->
+      <div>
+        <div class="realframe">
+          <div class="scrim soft"></div>
+          <div class="center-lock">
+            <svg width="76" height="76" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-oxanium" style="font-size:34px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+          </div>
+        </div>
+        <div class="mockcap">Intro / outro · centered full logo (not a watermark)</div>
+      </div>
+
+    </div>
+
+    <!-- ===== 04·b second frame ===== -->
+    <div class="sec-head" style="margin-top:34px"><span class="sec-num">04·b</span><h2 style="font-size:20px">On the second frame</h2></div>
+    <p class="sec-note" style="margin-bottom:22px">Same wafer-only watermark on a busier, warmer setup — a good stress-test for legibility.</p>
+    <div class="grid2">
+
+      <!-- wafer mark white top-left (where old logo sat) -->
+      <div>
+        <div class="realframe austin">
+          <div class="bug tl op"><svg width="46" height="46" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Wafer mark · white · top-left</div>
+      </div>
+
+      <!-- wafer mark white top-right -->
+      <div>
+        <div class="realframe austin">
+          <div class="bug tr op"><svg width="46" height="46" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Wafer mark · white · top-right</div>
+      </div>
+
+      <!-- lower third Austin + wafer watermark -->
+      <div>
+        <div class="realframe austin">
+          <div class="l3 bar"><span class="accent"></span><div class="name f-space">Austin Lyons</div><div class="role">Semi Doped · Chipstrat</div></div>
+          <div class="bug tr op"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Lower-third + wafer watermark</div>
+      </div>
+
+      <!-- intro/outro centered -->
+      <div>
+        <div class="realframe austin">
+          <div class="scrim soft"></div>
+          <div class="center-lock">
+            <svg width="76" height="76" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-oxanium" style="font-size:34px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+          </div>
+        </div>
+        <div class="mockcap">Intro / outro · centered full logo</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. SOCIALS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Socials <span class="tag">avatars + headers</span></h2></div>
+    <p class="sec-note">The colored wafer on black — the profile picture (the corner-removed lattice fits a round crop cleanly). Header/banner mockups per platform below.</p>
+
+    <!-- Avatar -->
+    <div class="platform">
+      <div class="phead">Avatar / profile pic</div>
+      <div class="avrow" style="padding:26px">
+        <div class="avwrap"><div class="avatar" style="width:128px;height:128px"><svg width="84" height="84" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg></div><div class="avcap">Colored wafer · on black</div></div>
+      </div>
+    </div>
+
+    <!-- X / Twitter -->
+    <div class="platform">
+      <div class="phead"><svg class="dotmk" width="16" height="16" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg> X / Twitter</div>
+      <div class="banner x3">
+        <div class="glow"></div>
+        <div class="content">
+          <svg width="60" height="60" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="wm f-space" style="font-size:32px;font-weight:700;letter-spacing:.06em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+            <div class="btagline">The world's most interesting industry · and its most interesting people</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="prow">
+          <div class="avatar pa" style="width:84px;height:84px"><svg width="54" height="54" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg></div>
+          <div class="pinfo"><div class="pname">Semi Doped</div><div class="phandle">@semidoped</div></div>
+        </div>
+        <div class="pbio">Two engineers on the semiconductor industry, AI hardware, and the capital moving through both. New episodes weekly.</div>
+        <div class="pmeta">chipstrat.ai · Joined 2025</div>
+      </div>
+    </div>
+
+    <!-- YouTube -->
+    <div class="platform">
+      <div class="phead"><svg class="dotmk" width="16" height="16" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg> YouTube — channel banner</div>
+      <div class="banner yt">
+        <div class="glow"></div>
+        <div class="safe">
+          <span class="safelbl">TV-safe area</span>
+          <div class="content">
+            <svg width="74" height="74" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-space" style="font-size:38px;font-weight:700;letter-spacing:.1em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+            <div class="btagline">The world's most interesting industry · and its most interesting people</div>
+          </div>
+        </div>
+      </div>
+      <div class="avrow" style="padding:16px 20px">
+        <div class="avatar" style="width:64px;height:64px"><svg width="42" height="42" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg></div>
+        <div style="align-self:center"><div class="pname f-space" style="font-family:'Space Grotesk';font-weight:700;font-size:18px">Semi Doped</div><div class="phandle" style="font-family:'IBM Plex Mono';font-size:12px;color:var(--muted)">@semidoped · 12.4K subscribers</div></div>
+      </div>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="platform">
+      <div class="phead"><svg class="dotmk" width="16" height="16" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg> LinkedIn — company page</div>
+      <div class="banner li">
+        <div class="glow"></div>
+        <div class="content" style="gap:14px">
+          <svg width="42" height="42" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg>
+          <div class="wm f-space whitebug" style="font-size:22px;font-weight:700;letter-spacing:.14em"><span class="s">SEMI DOPED</span></div>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="prow">
+          <div class="avatar pa sq" style="width:78px;height:78px"><svg width="50" height="50" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg></div>
+          <div class="pinfo"><div class="pname">Semi Doped</div><div class="phandle">Media &amp; Publishing · Podcast</div></div>
+        </div>
+        <div class="pbio">Independent semiconductor &amp; AI-hardware podcast and newsletter.</div>
+      </div>
+    </div>
+
+    <!-- Podcast cover — font options -->
+    <div class="platform">
+      <div class="phead">Podcast cover art (square · Spotify / Apple) — font options</div>
+      <div id="coverGrid" class="avrow" style="justify-content:center;padding:24px;gap:18px"></div>
+    </div>
+
+    <!-- OG / link-preview card -->
+    <div class="platform">
+      <div class="phead">Link preview / OG card (1200×630)</div>
+      <div class="avrow" style="justify-content:center;padding:22px">
+        <div class="ogcard">
+          <div class="ogimg">
+            <div class="glow2"></div>
+            <svg width="70" height="70" viewBox="0 0 100 100" style="position:relative"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-space" style="position:relative;font-size:30px;font-weight:700;letter-spacing:.11em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+            <div class="btagline" style="position:relative">The world's most interesting industry</div>
+          </div>
+          <div class="ogmeta"><div class="ogu">chipstrat.ai</div><div class="ogt">Semi Doped — the semiconductor &amp; AI podcast</div><div class="ogd">Two engineers on the industry, the hardware, and the money moving through both.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ADVERTISERS / SPONSORS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><h2>With advertisers <span class="tag">placeholder brands</span></h2></div>
+    <p class="sec-note">Our white logo shown with the <b>presenting sponsor</b> in the corner opposite ours and a row of <b>supporting sponsors</b> along the bottom. Sponsor names are fictional placeholders to show the layout.</p>
+
+    <div id="sponsorGrid" class="grid2"></div>
+
+    <div class="sec-head" style="margin-top:30px"><span class="sec-num">06·b</span><h2 style="font-size:20px">Sponsors with lower-third &amp; intro card</h2></div>
+    <div class="grid2" style="margin-top:16px">
+
+      <!-- Wafer bug + presenting + supporting (Substack first) -->
+      <div>
+        <div class="realframe austin">
+          <div class="bug tl op"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+          <div class="bug tr" style="flex-direction:column;align-items:flex-end;gap:3px">
+            <span class="slabel">Presented by</span>
+            <span class="sponsor" style="font-size:17px"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2 L22 20 L2 20 Z" fill="none" stroke="#fff" stroke-width="2"/></svg> AXION</span>
+          </div>
+          <div class="supportbar">
+            <span class="slabel">Supported by</span>
+            <span class="sponsor" style="font-size:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><rect x="4" y="3.2" width="16" height="3"/><rect x="4" y="8.4" width="16" height="3"/><path d="M4 13.4 H20 V21.2 L12 17.4 L4 21.2 Z"/></svg> SUBSTACK</span>
+            <span class="sponsor" style="font-size:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/></svg> NOVA SILICON</span>
+            <span class="sponsor" style="font-size:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2"/></svg> FORGE</span>
+          </div>
+        </div>
+        <div class="mockcap">Wafer bug · presenting + supporting (Substack first)</div>
+      </div>
+
+      <!-- Lower-third + presenting sponsor -->
+      <div>
+        <div class="realframe">
+          <div class="l3 bar"><span class="accent"></span><div class="name f-space">Vikram Sekar</div><div class="role">Semi Doped · Vik's Newsletter</div></div>
+          <div class="bug tl op" style="gap:.5em"><svg width="28" height="28" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg><div class="wm f-space whitebug" style="font-size:12px;font-weight:700;letter-spacing:.08em;display:flex;flex-direction:column;line-height:1.05"><span class="s">SEMI</span><span class="s">DOPED</span></div></div>
+          <div class="bug tr" style="flex-direction:column;align-items:flex-end;gap:3px">
+            <span class="slabel">Presented by</span>
+            <span class="sponsor" style="font-size:17px"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2 L22 20 L2 20 Z" fill="none" stroke="#fff" stroke-width="2"/></svg> AXION</span>
+          </div>
+        </div>
+        <div class="mockcap">Lower-third + presenting sponsor coexisting</div>
+      </div>
+
+      <!-- Intro card "presented by" -->
+      <div>
+        <div class="realframe austin">
+          <div class="scrim soft"></div>
+          <div class="center-lock">
+            <svg width="70" height="70" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-space" style="font-size:32px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:6px">
+              <span class="slabel">Presented by</span>
+              <span class="sponsor" style="font-size:20px"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2 L22 20 L2 20 Z" fill="none" stroke="#fff" stroke-width="2"/></svg> AXION</span>
+            </div>
+          </div>
+        </div>
+        <div class="mockcap">Intro / outro card with presenting sponsor</div>
+      </div>
+
+      <!-- Full-width lower bar -->
+      <div>
+        <div class="realframe">
+          <div class="bug tl op"><svg width="30" height="30" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+          <div class="fullbar"><span class="fbacc"></span><div><div class="fbname">Vikram Sekar</div><div class="fbrole">Semi Doped · Vik's Newsletter</div></div><div class="fbright"><span class="slabel">Presented by</span><span class="sponsor" style="font-size:16px"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 2 L22 20 L2 20 Z" fill="none" stroke="#fff" stroke-width="2"/></svg> AXION</span></div></div>
+        </div>
+        <div class="mockcap">Full-width lower bar · name + presenting sponsor</div>
+      </div>
+
+      <!-- Sponsor end-card -->
+      <div>
+        <div class="realframe" style="background:#070707">
+          <div class="scrim" style="background:radial-gradient(60% 90% at 50% 40%,rgba(233,104,34,.16),transparent 62%)"></div>
+          <div class="center-lock" style="gap:12px">
+            <svg width="60" height="60" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-space" style="font-size:26px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px;margin-top:8px">
+              <span class="slabel">Presented by</span>
+              <span class="sponsor" style="font-size:19px"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M12 2 L22 20 L2 20 Z" fill="none" stroke="#fff" stroke-width="2"/></svg> AXION</span>
+              <span class="slabel" style="margin-top:8px">Supported by</span>
+              <div style="display:flex;gap:20px"><span class="sponsor" style="font-size:13px">NOVA SILICON</span><span class="sponsor" style="font-size:13px">FORGE</span><span class="sponsor" style="font-size:13px">HELIX</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="mockcap">Sponsor end-card (outro)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. BACKGROUND TEMPLATE ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Video background template <span class="tag">first pass</span></h2></div>
+    <p class="sec-note">Reusable dark backdrops with a gentle warm solar flare — matches the brand black, keeps the center clean for content. For title cards, section dividers, intros/outros, and thumbnails. Three flare variations delivered as <code>sd_bg_template.png / …2.png / …3.png</code> (1920×1080).</p>
+    <div class="grid2">
+
+      <div>
+        <div class="bgframe"></div>
+        <div class="mockcap">Plain background · 1920×1080</div>
+      </div>
+
+      <div>
+        <div class="bgframe">
+          <div class="center-lock">
+            <svg width="80" height="80" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-oxanium" style="font-size:36px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+          </div>
+        </div>
+        <div class="mockcap">Intro / title card · centered logo</div>
+      </div>
+
+      <div>
+        <div class="bgframe">
+          <div style="position:absolute;left:7%;top:50%;transform:translateY(-50%);max-width:70%">
+            <div class="btagline" style="color:#d9b48a;margin-bottom:10px">Episode 14</div>
+            <div class="f-space" style="font-size:40px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:.01em">The inference<br>ASIC wars</div>
+          </div>
+          <div class="bug tr op"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Section divider / topic card · left-aligned title</div>
+      </div>
+
+      <div>
+        <div class="bgframe">
+          <div class="l3 bar"><span class="accent"></span><div class="name f-space">Austin Lyons</div><div class="role">Semi Doped · Chipstrat</div></div>
+          <div class="bug tr op"><svg width="34" height="34" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>
+        </div>
+        <div class="mockcap">Guest-audio / talking-point card · lower-third</div>
+      </div>
+
+      <div>
+        <div class="bgframe v2">
+          <div class="center-lock">
+            <svg width="80" height="80" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-oxanium" style="font-size:36px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+          </div>
+        </div>
+        <div class="mockcap">Variation 2 · flare from the right</div>
+      </div>
+
+      <div>
+        <div class="bgframe v3">
+          <div class="center-lock">
+            <svg width="80" height="80" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg>
+            <div class="wm f-oxanium" style="font-size:36px;font-weight:700;letter-spacing:.12em"><span class="s">SEMI </span><span class="d">DOPED</span></div>
+          </div>
+        </div>
+        <div class="mockcap">Variation 3 · fireplace ember (from below)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wrap footer">
+  <div class="rec">
+    <h3>How to read this</h3>
+    <ul>
+      <li><b>Direction locked so far:</b> all-caps wordmark, solid colors (SEMI white / DOPED orange), gradient reserved for the wafer mark, white logo overlays on video, wafer mark as the bug. Open question: which font.</li>
+      <li>Each font is shown at wordmark and full-logo scale, then on real frames so you can see it small.</li>
+      <li>For the persistent watermark, the <b>white wafer mark</b> or <b>white full logo</b> at ~72% opacity (a corner) reads cleanest over busy footage.</li>
+      <li>Lower-thirds use the display font for the name + IBM Plex Mono for the role line.</li>
+    </ul>
+  </div>
+  <p style="margin-top:20px">Fonts load live from Google Fonts (needs internet). Frame images (<code>sd_frame.jpg</code>, <code>sd_frame_austin.jpg</code>) sit beside this file. Once a font + treatment is chosen, clean SVG/PNG exports at broadcast sizes are the next step.</p>
+</div>
+
+<script>
+function lattice(g, mode){
+  const cols=[20,40,60,80], rows=[20,40,60,80];
+  const colColor=['#F2C300','#F0951C','#E96822','#D94A1E'];
+  const corners=new Set(['20,20','80,20','20,80','80,80']);
+  const dopedX=60,dopedY=60; let out='';
+  const solid = mode==='white' ? '#ffffff' : (mode==='black' ? '#070707' : null);
+  rows.forEach(y=>cols.forEach((x,ci)=>{
+    if(corners.has(x+','+y)) return;
+    if(x===dopedX&&y===dopedY){
+      const stroke = solid || '#E96822';
+      out+=`<circle cx="${x}" cy="${y}" r="6.5" fill="none" stroke="${stroke}" stroke-width="3"/>`;
+    } else {
+      const fill = solid || colColor[ci];
+      out+=`<circle cx="${x}" cy="${y}" r="7.5" fill="${fill}"/>`;
+    }
+  }));
+  g.innerHTML=out;
+}
+// ---- Sponsors across every logo variation ----
+const PRES = '<div class="bug tr" style="flex-direction:column;align-items:flex-end;gap:3px"><span class="slabel">Presented by</span><span class="sponsor" style="font-size:17px"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2 L22 20 L2 20 Z" fill="none" stroke="#fff" stroke-width="2"/></svg> AXION</span></div>';
+const SUPP = '<div class="supportbar"><span class="slabel">Supported by</span>'
+  + '<span class="sponsor" style="font-size:14px"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/></svg> NOVA SILICON</span>'
+  + '<span class="sponsor" style="font-size:14px"><svg width="14" height="14" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2"/></svg> FORGE</span>'
+  + '<span class="sponsor" style="font-size:14px"><svg width="15" height="14" viewBox="0 0 24 24"><path d="M4 18 C10 4 14 20 20 6" fill="none" stroke="#fff" stroke-width="2"/></svg> HELIX</span>'
+  + '</div>';
+const fullWhite='<div class="bug tl op" style="gap:.5em"><svg width="30" height="30" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg><div class="wm f-space whitebug" style="font-size:13px;font-weight:700;letter-spacing:.08em;display:flex;flex-direction:column;line-height:1.05"><span class="s">SEMI</span><span class="s">DOPED</span></div></div>';
+const fullColor='<div class="bug tl" style="gap:.5em"><svg width="30" height="30" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg><div class="wm f-space" style="font-size:13px;font-weight:700;letter-spacing:.08em;display:flex;flex-direction:column;line-height:1.05"><span class="s">SEMI</span><span class="d">DOPED</span></div></div>';
+const wordWhite='<div class="bug tl op"><div class="wm f-space whitebug" style="font-size:15px;font-weight:700;letter-spacing:.1em"><span class="s">SEMI </span><span class="d">DOPED</span></div></div>';
+const sdColor='<div class="bug tl"><span class="mono f-space" style="font-size:34px;font-weight:700"><span class="s">S</span><span class="d">D</span></span></div>';
+const sdWhite='<div class="bug tl op"><span class="mono f-space" style="font-size:32px;font-weight:700;color:#fff"><span class="s" style="color:#fff">S</span><span class="d" style="color:#fff">D</span></span></div>';
+const markWhite='<div class="bug tl op"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="white"></g></svg></div>';
+const markColor='<div class="bug tl"><svg width="40" height="40" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg></div>';
+const pixelWhite='<div class="bug tl op"><span class="mono f-doto" style="font-size:38px;font-weight:900;color:#fff"><span class="s" style="color:#fff">S</span><span class="d" style="color:#fff">D</span></span></div>';
+const VARS=[
+  ['Full logo · white', fullWhite, ''],
+  ['Full logo · white', fullWhite, ' austin'],
+  ['Wordmark only · white', wordWhite, ''],
+  ['Wafer mark only · white', markWhite, ' austin'],
+];
+const sg=document.getElementById('sponsorGrid');
+if(sg){
+  sg.innerHTML=VARS.map(function(v){
+    return '<div><div class="realframe'+v[2]+'">'+v[1]+PRES+SUPP+'</div><div class="mockcap">'+v[0]+' + presenting &amp; supporting sponsors</div></div>';
+  }).join('');
+}
+
+// ---- Podcast covers in each font ----
+const COVERFONTS=[['Sora','f-sora',700,'.1em'],['Syne','f-syne',700,'.09em'],['Oxanium','f-oxanium',700,'.06em'],['Playfair','f-playfair',700,'.05em']];
+const cg=document.getElementById('coverGrid');
+if(cg){
+  let h=COVERFONTS.map(function(f){
+    return '<div class="avwrap"><div class="cover warm"><svg width="70" height="70" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg><div class="wm '+f[1]+'" style="font-size:20px;font-weight:'+f[2]+';letter-spacing:'+f[3]+';flex-direction:column;align-items:center;line-height:1.05"><span class="s">SEMI</span><span class="d">DOPED</span></div></div><div class="avcap">'+f[0]+' · warm</div></div>';
+  }).join('');
+  h+='<div class="avwrap"><div class="cover light"><svg width="70" height="70" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg><div class="wm f-sora" style="font-size:20px;font-weight:700;letter-spacing:.09em;flex-direction:column;align-items:center;line-height:1.05"><span class="s" style="color:#070707">SEMI</span><span class="d">DOPED</span></div></div><div class="avcap">Sora · light</div></div>';
+  cg.innerHTML=h;
+}
+
+// ---- Font candidates: weights + horizontal & vertical lockups ----
+const FONTS=[
+  {name:'Sora', cls:'f-sora', tag:'premium sans', note:'Clean geometric D, straight stem. Modern and expensive.', w:[500,700,800], vw:700, ls:'.14em'},
+  {name:'Syne', cls:'f-syne', tag:'editorial luxe', note:'Squared D with real character. High-end, editorial.', w:[600,700,800], vw:700, ls:'.10em'},
+  {name:'Oxanium', cls:'f-oxanium', tag:'techy', note:'Rounded-rectangle D. Distinctive and on-theme.', w:[600,700,800], vw:700, ls:'.12em'},
+  {name:'Saira', cls:'f-saira', tag:'industrial', note:'Clean grotesque D, flat sides. Sturdy and neutral.', w:[600,700,800], vw:800, ls:'.10em'},
+  {name:'Playfair Display', cls:'f-playfair', tag:'regal serif', note:'High-contrast serif — regal, rich, expensive. The boldest departure.', w:[600,700,900], vw:700, ls:'.05em'},
+];
+const fc=document.getElementById('fontCandidates');
+if(fc){
+  fc.innerHTML=FONTS.map(function(f){
+    var weights=f.w.map(function(w){
+      return '<div style="display:flex;align-items:baseline;gap:16px"><span class="wlabel">'+w+'</span><div class="wm med '+f.cls+'" style="font-weight:'+w+';letter-spacing:'+f.ls+'"><span class="s">SEMI </span><span class="d">DOPED</span></div></div>';
+    }).join('');
+    var horiz='<div class="card" style="min-height:210px"><div class="lockup"><svg width="74" height="74" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg><div class="wm med '+f.cls+'" style="font-weight:'+f.vw+';letter-spacing:'+f.ls+'"><span class="s">SEMI </span><span class="d">DOPED</span></div></div><div class="label">Horizontal lockup</div></div>';
+    var vert='<div class="card" style="min-height:210px;gap:22px"><svg width="86" height="86" viewBox="0 0 100 100"><g class="lat" data-mode="color"></g></svg><div class="wm '+f.cls+'" style="font-size:32px;font-weight:'+f.vw+';letter-spacing:'+f.ls+'"><span class="s">SEMI </span><span class="d">DOPED</span></div><div class="label">Vertical · centered lockup</div></div>';
+    return '<div class="sec-head" style="margin-top:34px"><span class="sec-num">◆</span><h2 style="font-size:20px">'+f.name+' <span class="tag">'+f.tag+'</span></h2></div>'
+      +'<p class="sec-note" style="margin-bottom:16px">'+f.note+'</p>'
+      +'<div class="row" style="flex-direction:column;align-items:flex-start;gap:16px">'+weights+'</div>'
+      +'<div class="grid2" style="margin-bottom:8px">'+horiz+vert+'</div>';
+  }).join('');
+}
+
+document.querySelectorAll('g.lat').forEach(g=>lattice(g, g.dataset.mode));
+</script>
+</body>
+</html>
