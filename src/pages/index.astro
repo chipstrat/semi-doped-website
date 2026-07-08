@@ -37,14 +37,14 @@ const recent = rest.slice(0, 5);
       <p class="tagline">The business and technology of semiconductors. Alpha for engineers and investors alike.</p>
       <div class="hostgrid">
         <div class="host">
-          <div class="avatar">AL</div>
+          <img class="avatar" src="/hosts/austin.jpg" alt="Austin Lyons" width="64" height="64" loading="lazy" />
           <div>
             <div class="name">Austin Lyons</div>
             <div class="role">Analyst &amp; founder, <a href="https://www.chipstrat.com/" rel="noopener">Chipstrat</a></div>
           </div>
         </div>
         <div class="host">
-          <div class="avatar">VS</div>
+          <img class="avatar" src="/hosts/vik.jpg" alt="Vik Sekar" width="64" height="64" loading="lazy" />
           <div>
             <div class="name">Vik Sekar</div>
             <div class="role">RF engineer &amp; author, <a href="https://www.viksnewsletter.com/" rel="noopener">Vik&rsquo;s Newsletter</a></div>
@@ -117,14 +117,7 @@ const recent = rest.slice(0, 5);
     height: 64px;
     border-radius: 50%;
     flex: none;
-    background: radial-gradient(circle at 50% 38%, #E96822, #7d2910);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 20px;
+    object-fit: cover;
   }
   .name {
     font-family: var(--font-display);
