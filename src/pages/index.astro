@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Player from '../components/Player.astro';
 import Platforms from '../components/Platforms.astro';
 import EpisodeRow from '../components/EpisodeRow.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import DailySignup from '../components/DailySignup.astro';
 import { getEpisodes, formatDateLong, formatDuration, epNum } from '../lib/feed';
 
@@ -12,14 +13,21 @@ const recent = rest.slice(0, 5);
 ---
 <Base title="Semi Doped — The Semiconductor Podcast">
   <section class="hero">
-    <div class="wrap">
-      <div class="kicker">
-        <b>{epNum(latest.num)}</b>&ensp;·&ensp;{formatDateLong(latest.date)}&ensp;·&ensp;{formatDuration(latest.duration)}
+    <div class="wrap herogrid">
+      <div class="hero-copy">
+        <div class="kicker">
+          <b>{epNum(latest.num)}</b>&ensp;·&ensp;{formatDateLong(latest.date)}&ensp;·&ensp;{formatDuration(latest.duration)}
+        </div>
+        <h1><a href={`/episodes/${latest.slug}/`}>{latest.title}</a></h1>
+        <p class="dek">{latest.summary.length > 200 ? latest.summary.slice(0, 200).trimEnd() + '…' : latest.summary}</p>
+        <Player src={latest.mp3} duration={latest.duration} />
+        <Platforms />
       </div>
-      <h1><a href={`/episodes/${latest.slug}/`}>{latest.title}</a></h1>
-      <p class="dek">{latest.summary.length > 260 ? latest.summary.slice(0, 260).trimEnd() + '…' : latest.summary}</p>
-      <Player src={latest.mp3} duration={latest.duration} />
-      <Platforms />
+      {latest.videoId && (
+        <div class="hero-video">
+          <YouTubeEmbed videoId={latest.videoId} title={latest.title} />
+        </div>
+      )}
     </div>
   </section>
 
@@ -60,14 +68,24 @@ const recent = rest.slice(0, 5);
 <style>
   .hero {
     border-bottom: 1px solid var(--hairline);
-    padding: 68px 0 56px;
+    padding: 56px 0 48px;
+  }
+  .herogrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: var(--sp-2xl);
+    align-items: center;
+  }
+  @media (max-width: 940px) {
+    .herogrid { grid-template-columns: 1fr; }
+    .hero-video { order: -1; }
   }
   .hero .kicker { margin-bottom: 20px; }
   .hero h1 {
-    font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(28px, 3.4vw, 38px);
     letter-spacing: 0.005em;
-    max-width: 19ch;
-    margin-bottom: 22px;
+    max-width: 22ch;
+    margin-bottom: 18px;
   }
   .hero h1 a { color: var(--ink); text-decoration: none; transition: color 0.2s ease; }
   .hero h1 a:hover { color: var(--accent); }
