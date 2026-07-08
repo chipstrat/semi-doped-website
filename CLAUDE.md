@@ -1,27 +1,12 @@
-# Semi Doped Website
+# semidoped.fm — redirect shell
 
-The public website for the Semi Doped podcast. Astro static site.
+This repo used to be the Semi Doped podcast site. On 2026-07-08 the site was
+merged into **semi-doped-home** (semidoped.com), and this repo now only serves
+redirects: every path on semidoped.fm forwards to the same path on
+semidoped.com (index.html for /, 404.html for everything else — GitHub Pages
+serves 404.html for unknown paths, and its JS forwards with the full path).
 
-## Design System
-Always read DESIGN.md before making any visual or UI decisions.
-All font choices, colors, spacing, and aesthetic direction are defined there.
-Do not deviate without explicit user approval.
-In QA mode, flag any code that doesn't match DESIGN.md.
+Do not add content here. The live site, episode pages, design system, and all
+future work live in the semi-doped-home repo.
 
-Key guardrail: this is a **professional podcast site**, not a semiconductor
-theme park. Brand personality comes only through the wafer mark, the
-orange accent, and generated episode art. No in-joke features.
-
-## Data sources
-- Episodes: Buzzsprout RSS `https://feeds.buzzsprout.com/2570635.rss` (fetched at build time)
-- YouTube: https://youtube.com/@SemiDoped
-- Semi Doped Daily (Substack): https://www.semidoped.com/
-
-## Commands
-- `npm run dev` — local dev server
-- `npm run build` — production build to dist/
-- `npm run preview` — serve the production build locally
-
-## Future direction
-Properties will unify under semidoped.com subdomains (e.g. podcast.semidoped.com,
-daily.semidoped.com). This repo is the podcast property.
+`brand/` and `design/` keep historical brand reference files.

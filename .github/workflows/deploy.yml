@@ -1,12 +1,10 @@
 name: Deploy to GitHub Pages
 
+# semidoped.fm is a redirect shell: every path forwards to the same path on
+# semidoped.com (the merged site). No build step, no schedule needed.
 on:
   push:
     branches: [main]
-  schedule:
-    # Hourly rebuild: the Buzzsprout RSS feed is fetched at build time, so
-    # new episodes appear on the site without any manual deploy.
-    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -19,26 +17,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
       - id: deployment
         uses: actions/deploy-pages@v4
